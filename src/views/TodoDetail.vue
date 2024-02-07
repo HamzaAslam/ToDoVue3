@@ -67,7 +67,7 @@ let description = ref("");
 let edit = ref("true");
 const route = useRoute();
 const router = useRouter();
-
+// handle get single todo api
 const fetchTodo = async () => {
   if (currentUser) {
     const response = await getSingleTodo(jwt_token, route.params.id);
@@ -76,14 +76,13 @@ const fetchTodo = async () => {
     console.log(error);
   }
 };
-
+// toggle button while editing
 function toggleEditbtn() {
   edit.value = !edit.value;
 }
-
+// handling edit api
 const handleEdit = async () => {
   try {
-    console.log(description.value);
     const response = await updateTodo(
       jwt_token,
       route.params.id,
@@ -95,6 +94,7 @@ const handleEdit = async () => {
     console.log(error.message);
   }
 };
+// handling delete api
 const handleDelete = async () => {
   try {
     await deleteTodo(jwt_token, route.params.id);

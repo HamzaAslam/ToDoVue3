@@ -51,7 +51,7 @@ const { signUp, error } = useAuth();
 const email = ref("");
 const password = ref("");
 const password_confirmation = ref("");
-
+//handle signup api
 const handleSingnup = async () => {
   if (password.value.trim() == password_confirmation.value.trim()) {
     if (

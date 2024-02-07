@@ -1,9 +1,8 @@
 import { ref } from "vue";
 export const useTodos = () => {
   const error = ref(null);
+  //getting todos api here
   const getTodo = async (jwt_token, pageNum) => {
-    console.log(jwt_token);
-
     const response = await fetch(
       `http://3.232.244.22/api/items?page=${pageNum}`,
       {
@@ -24,6 +23,8 @@ export const useTodos = () => {
       console.log("Get Todo Request failed:", response);
     }
   };
+  //getting single todos api here
+
   const getSingleTodo = async (jwt_token, todoid) => {
     const response = await fetch(`http://3.232.244.22/api/item/${todoid}`, {
       method: "GET",
@@ -42,6 +43,7 @@ export const useTodos = () => {
       console.log("Get Single Todo Request failed:", response);
     }
   };
+  //handeling create todos api here
 
   const createTodo = async (title, description, jwt_token) => {
     try {
@@ -69,6 +71,9 @@ export const useTodos = () => {
       console.error("Create Todo Error:", error.value);
     }
   };
+
+  //handeling delete todos api here
+
   const deleteTodo = async (jwt_token, todoid) => {
     try {
       await fetch(`http://3.232.244.22/api/item/${todoid}`, {
@@ -85,6 +90,9 @@ export const useTodos = () => {
       console.error("Delete Todo Error:", error.value);
     }
   };
+
+  //handeling update todos api here
+
   const updateTodo = async (jwt_token, todoid, description) => {
     try {
       const response = await fetch(`http://3.232.244.22/api/item/${todoid}`, {

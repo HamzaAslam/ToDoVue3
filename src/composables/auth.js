@@ -2,6 +2,7 @@ import { ref } from "vue";
 
 export const useAuth = () => {
   const error = ref(null);
+  //handeling signup api
   const signUp = async (email, password, password_confirmation) => {
     try {
       const response = await fetch("http://3.232.244.22/api/register", {
@@ -24,6 +25,7 @@ export const useAuth = () => {
       console.error("Signup Auth Error:", error.value);
     }
   };
+  //handeling log in api
 
   const logIn = async (email, password) => {
     try {
@@ -38,7 +40,6 @@ export const useAuth = () => {
           password: password,
         }),
       });
-      console.log(response);
       if (response.status != 200) {
         error.value = "Please check Email/Password";
       } else {

@@ -47,7 +47,7 @@ const { logIn, error } = useAuth();
 
 const email = ref("");
 const password = ref("");
-
+// handle login api
 const handleLogin = async () => {
   if (email.value.trim() !== "" && password.value.trim() !== "") {
     const response = await logIn(email.value, password.value);

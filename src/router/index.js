@@ -27,7 +27,6 @@ const router = createRouter({
       path: "/todo/:id",
       name: "todo",
       component: TodoDetail,
-      // beforeEnter: requireAuth,
     },
   ],
 });

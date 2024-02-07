@@ -6,7 +6,7 @@ import { storeToRefs } from "pinia";
 
 const user_profile = userConfig();
 const { currentUser } = storeToRefs(user_profile);
-
+// route guard here
 router.beforeEach((to, from, next) => {
   if (to.name == "todo") {
     if (currentUser.value) {

@@ -9,6 +9,7 @@
         praesentium tempore corporis sequi optio, unde perspiciatis odit!
         Expedita, reiciendis.
       </p>
+      <!-- -------- if we have a loged in user then we'll show his todos----- -->
       <section v-if="currentUser">
         <Todo />
       </section>

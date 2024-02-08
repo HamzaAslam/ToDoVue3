@@ -1,8 +1,10 @@
 import { ref } from "vue";
 export const useTodos = () => {
   const error = ref(null);
+  const spiner = ref(false);
   //getting todos api here
   const getTodo = async (jwt_token, pageNum) => {
+    spiner.value = !spiner.value;
     const response = await fetch(
       `http://3.232.244.22/api/items?page=${pageNum}`,
       {
@@ -17,6 +19,7 @@ export const useTodos = () => {
     const responseData = await response.json();
     if (responseData.success) {
       error.value = "";
+      spiner.value = !spiner.value;
       return responseData;
     } else {
       error.value = response;
@@ -37,6 +40,7 @@ export const useTodos = () => {
     const responseData = await response.json();
     if (responseData.success) {
       error.value = "";
+
       return responseData;
     } else {
       error.value = response;
@@ -47,6 +51,8 @@ export const useTodos = () => {
 
   const createTodo = async (title, description, jwt_token) => {
     try {
+      spiner.value = !spiner.value;
+
       const response = await fetch("http://3.232.244.22/api/item", {
         method: "POST",
         headers: {
@@ -64,6 +70,8 @@ export const useTodos = () => {
       } else {
         const responseData = await response.json();
         error.value = "";
+        spiner.value = !spiner.value;
+
         return responseData;
       }
     } catch (err) {
@@ -75,6 +83,8 @@ export const useTodos = () => {
   //handeling delete todos api here
 
   const deleteTodo = async (jwt_token, todoid) => {
+    spiner.value = !spiner.value;
+
     try {
       await fetch(`http://3.232.244.22/api/item/${todoid}`, {
         method: "DELETE",
@@ -85,6 +95,7 @@ export const useTodos = () => {
         },
       });
       error.value = "";
+      spiner.value = !spiner.value;
     } catch (err) {
       error.value = err;
       console.error("Delete Todo Error:", error.value);
@@ -95,6 +106,8 @@ export const useTodos = () => {
 
   const updateTodo = async (jwt_token, todoid, description) => {
     try {
+      spiner.value = !spiner.value;
+
       const response = await fetch(`http://3.232.244.22/api/item/${todoid}`, {
         method: "PUT",
         headers: {
@@ -108,11 +121,21 @@ export const useTodos = () => {
       const responseData = await response.json();
       error.value = "";
       console.log(responseData);
+      spiner.value = !spiner.value;
+
       return responseData;
     } catch (err) {
       error.value = responseData;
       console.error("Edit Todo Error:", error.value);
     }
   };
-  return { getTodo, getSingleTodo, createTodo, deleteTodo, updateTodo, error };
+  return {
+    getTodo,
+    getSingleTodo,
+    createTodo,
+    deleteTodo,
+    updateTodo,
+    error,
+    spiner,
+  };
 };

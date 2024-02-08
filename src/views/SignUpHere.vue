@@ -29,6 +29,7 @@
       <button
         @submit.prevent="handleSingnup()"
         class="border-2 rounded-md mx-auto mt-8 p-2 px-4"
+        :class="{ 'bg-slate-500 pointer-events-none	 ': spiner }"
       >
         Sign Up!
       </button>
@@ -47,7 +48,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuth } from "../composables/auth";
 const router = useRouter();
-const { signUp, error } = useAuth();
+const { signUp, error, spiner } = useAuth();
 const email = ref("");
 const password = ref("");
 const password_confirmation = ref("");

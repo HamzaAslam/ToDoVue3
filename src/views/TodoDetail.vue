@@ -35,6 +35,7 @@
         <button
           v-if="edit"
           class="border-2 rounded-md ml-3 my-3 p-2"
+          :class="{ 'bg-slate-500 pointer-events-none	 ': spiner }"
           @click="handleDelete"
         >
           Delete
@@ -57,7 +58,7 @@ import { useTodos } from "@/composables/useTodos";
 import { userConfig } from "@/stores/userConfig";
 import navbar from "@/components/navbar.vue";
 import { useRoute, useRouter } from "vue-router";
-const { getSingleTodo, deleteTodo, error, updateTodo } = useTodos();
+const { getSingleTodo, deleteTodo, error, updateTodo, spiner } = useTodos();
 
 const props = defineProps(["id"]);
 const user_profile = userConfig();
@@ -83,12 +84,7 @@ function toggleEditbtn() {
 // handling edit api
 const handleEdit = async () => {
   try {
-    const response = await updateTodo(
-      jwt_token,
-      route.params.id,
-      description.value
-    );
-    console.log(response);
+    await updateTodo(jwt_token, route.params.id, description.value);
     router.push({ name: "home" });
   } catch (error) {
     console.log(error.message);

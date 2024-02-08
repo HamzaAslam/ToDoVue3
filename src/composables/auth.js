@@ -2,9 +2,11 @@ import { ref } from "vue";
 
 export const useAuth = () => {
   const error = ref(null);
+  const spiner = ref(false);
   //handeling signup api
   const signUp = async (email, password, password_confirmation) => {
     try {
+      spiner.value = !spiner.value;
       const response = await fetch("http://3.232.244.22/api/register", {
         method: "POST",
         headers: {
@@ -19,6 +21,7 @@ export const useAuth = () => {
       });
       const responseData = await response.json();
       error.value = "";
+      spiner.value = !spiner.value;
       return responseData;
     } catch (err) {
       error.value = err.message;
@@ -29,6 +32,7 @@ export const useAuth = () => {
 
   const logIn = async (email, password) => {
     try {
+      spiner.value = !spiner.value;
       const response = await fetch("http://3.232.244.22/api/login", {
         method: "POST",
         headers: {
@@ -44,7 +48,7 @@ export const useAuth = () => {
         error.value = "Please check Email/Password";
       } else {
         const responseData = await response.json();
-
+        spiner.value = !spiner.value;
         return responseData;
       }
     } catch (err) {
@@ -54,5 +58,5 @@ export const useAuth = () => {
     }
   };
 
-  return { logIn, signUp, error };
+  return { logIn, signUp, error, spiner };
 };

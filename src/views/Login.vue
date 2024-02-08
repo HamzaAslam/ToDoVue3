@@ -22,6 +22,7 @@
       <button
         @submit.prevent="handleLogin"
         class="border-2 rounded-md mx-auto mt-8 p-2 px-4"
+        :class="{ 'bg-slate-500 pointer-events-none	 ': spiner }"
       >
         Sign In
       </button>
@@ -43,7 +44,7 @@ import { userConfig } from "../stores/userConfig.js";
 const user_profile = userConfig();
 const { setJwtToken, setUser } = user_profile;
 const router = useRouter();
-const { logIn, error } = useAuth();
+const { logIn, error, spiner } = useAuth();
 
 const email = ref("");
 const password = ref("");

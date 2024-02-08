@@ -18,7 +18,10 @@
         placeholder="Description"
         v-model="description"
       />
-      <button class="border-2 rounded-md mx-auto my-3 p-2">
+      <button
+        class="border-2 rounded-md mx-auto my-3 p-2"
+        :class="{ 'bg-slate-500 pointer-events-none	 ': spiner }"
+      >
         Create Your Todo
       </button>
       <div
@@ -64,7 +67,7 @@ import singleTodo from "./singleTodo.vue";
 let currentPage = ref("");
 let title = ref("");
 let description = ref("");
-const { getTodo, createTodo, error } = useTodos();
+const { getTodo, createTodo, error, spiner } = useTodos();
 const user_profile = userConfig();
 const { jwt_token } = user_profile;
 let todos = ref("");

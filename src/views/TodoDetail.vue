@@ -28,6 +28,7 @@
         <button
           v-if="!edit"
           class="border-2 rounded-md ml-3 my-3 p-2"
+          :class="{ 'bg-slate-500 pointer-events-none	 ': spiner }"
           @click="toggleEditbtn(), handleEdit()"
         >
           Update
